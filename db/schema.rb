@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_02_115328) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_08_035213) do
   create_table "order_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.bigint "product_id", null: false
@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_02_115328) do
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.decimal "total", precision: 10, null: false
-    t.string "status", default: "pending", null: false
+    t.integer "status", default: 0, null: false
     t.string "payment_type", null: false
     t.string "description"
     t.bigint "user_id", null: false
