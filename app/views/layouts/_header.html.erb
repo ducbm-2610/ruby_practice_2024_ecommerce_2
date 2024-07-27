@@ -11,8 +11,8 @@
         </li>
         <% if user_signed_in? %>
           <% if current_user.admin? %>
-            <li class="dropdown">
-              <%= link_to "#", {class: "admin-dropdown-toggle", "data-toggle" => "dropdown"} do %>
+            <li class="admin-dropdown">
+              <%= link_to "#", {class: "admin-dropdown-toggle", "data-toggle" => "admin-dropdown"} do %>
                 <%= t "header.admin" %>
                 <b class="caret"></b>
               <% end %>

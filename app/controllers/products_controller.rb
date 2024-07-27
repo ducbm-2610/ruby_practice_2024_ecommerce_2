@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
+  include ProductsHelper
+
   def index
-    @products = Product.all.newest
+    @q = Product.ransack(params[:q])
+    @pagy, @products = pagy @q.result.newest, items: Settings.digit_10
   end
 
   def show; end

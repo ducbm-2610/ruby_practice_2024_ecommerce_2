@@ -1,5 +1,7 @@
+<%=render "form_search"%>
 <div class="container">
   <div class="row">
     <%= render @products%>
   </div>
+  <%== pagy_bootstrap_nav @pagy %>
 </div>
