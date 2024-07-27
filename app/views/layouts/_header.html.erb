@@ -32,6 +32,9 @@
               <li> <%= link_to t("header.logout"), destroy_user_session_path, data: { turbo_method: :delete } %></li>
             </ul>
           </li>
+          <li class="dropdown" id="cart">
+            <%= render partial: "carts/cart", locals: { cart: @cart }%>
+          </li>
         <% else %>
           <li>
             <%= link_to("Registration", new_user_registration_path)%>

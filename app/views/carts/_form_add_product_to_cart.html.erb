@@ -1,0 +1,8 @@
+<%= form_for CartItem.new, url: cart_add_path(id: product.id, operator: "add"), remote: true, html: { class: "d-inline" } do |f| %>
+  <%= f.hidden_field :product_id, value: product.id %>
+  <div class="form-group">
+    <label for="quantity">Quantity:</label>
+    <%= f.number_field :quantity, value: 1, min: 1, max: product.quantity, class: "form-control d-inline w-auto", id: "quantity" %>
+  </div>
+  <%= f.submit 'Add to Cart', class: "btn btn-primary text-uppercase mr-2 px-4" %>
+<% end %>

@@ -1,0 +1,6 @@
+$("#cart").html("<%= j render partial: 'carts/cart', locals: { cart: @cart } %>");
+
+$('.cart-dropdown-toggle').on('click', function(event) {
+  event.preventDefault();
+  $('.dropdown-menu-cart').toggleClass('active');
+});

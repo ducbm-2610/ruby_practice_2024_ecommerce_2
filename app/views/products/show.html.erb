@@ -18,11 +18,12 @@
                 <span class="text-uppercase text-muted brand"><%= @product_category.name %></span>
                 <h5 class="text-uppercase"><%= @product.name %></h5>
                 <div class="price d-flex flex-row align-items-center"> <span class="act-price"><%= "#{@product.price}$" %></span>
-                <div class="price d-flex flex-row align-items-center"> <span class="act-price"><%= "Available: #{@product.quantity}" %></span>
+                  <div class="price d-flex flex-row align-items-center"> <span class="act-price"><%= "Available: #{@product.quantity}" %></span>
+                  </div>
                 </div>
+                <p class="about"><%= @product.description %></p>
+                <%= render partial: "carts/form_add_product_to_cart", locals: { product: @product }%>
               </div>
-              <p class="about"><%= @product.description %></p>
-              <div class="cart mt-4 align-items-center"> <button class="btn btn-primary text-uppercase mr-2 px-4">Add to cart</button> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
             </div>
           </div>
         </div>
