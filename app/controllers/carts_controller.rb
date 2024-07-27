@@ -1,6 +1,9 @@
 class CartsController < ApplicationController
   include CartsHelper
+  include UsersHelper
+
   before_action :check_and_redirect, only: %i(add)
+  before_action :load_cart, only: %i(checkout)
 
   def add
     product_id = params.dig(:cart_item, :product_id).to_s
@@ -26,6 +29,10 @@ class CartsController < ApplicationController
     respond_to(&:js)
   end
 
+  def checkout
+    @order = Order.new
+  end
+
   private
   def check_and_redirect
     return if user_signed_in?
@@ -37,10 +44,15 @@ class CartsController < ApplicationController
   end
 
   def handle_session_cart item, quantity
-    if session[:cart][item.id.to_s] + quantity < item.quantity
+    if session[:cart][item.id.to_s] + quantity <= item.quantity
       session[:cart][item.id.to_s] += quantity
     else
-      session[:cart][item.id.to_s] = item.quantity
+      respond_to do |format|
+        format.js{render js: "window.location = '#{product_path(item)}'"}
+      end
+      flash[:warning] =
+        "Item total in cart exceeds the remaining quantity of the
+        products. Please try again !"
     end
   end
 end
