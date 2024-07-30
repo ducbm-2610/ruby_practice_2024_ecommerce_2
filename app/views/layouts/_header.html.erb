@@ -1,0 +1,46 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "Ecommerce", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to "English", locale:"en" %>
+        </li>
+        <li>
+          <%= link_to "Vietnamese", locale:"vi" %>
+        </li>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <li class="dropdown">
+              <%= link_to "#", {class: "admin-dropdown-toggle", "data-toggle" => "dropdown"} do %>
+                <%= t "header.admin" %>
+                <b class="caret"></b>
+              <% end %>
+              <ul class="dropdown-menu dropdown-menu-admin">
+                <li><%= link_to "Manage", admin_dashboard_index_path %></li>
+              </ul>
+            </li>
+          <% end %>
+          <li class="dropdown">
+            <%= link_to "#", {class: "dropdown-toggle", "data-toggle" => "dropdown"} do %>
+              <%= t "header.account" %>
+              <b class="caret"></b>
+            <% end %>
+            <ul class="dropdown-menu dropdown-menu-user">
+              <li><%= link_to t("header.settings"), edit_user_registration_path %></li>
+              <li class="divider"></li>
+              <li> <%= link_to t("header.logout"), destroy_user_session_path, data: { turbo_method: :delete } %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to("Registration", new_user_registration_path)%>
+          </li>
+          <li>
+            <%= link_to("Login", new_user_session_path)%>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
