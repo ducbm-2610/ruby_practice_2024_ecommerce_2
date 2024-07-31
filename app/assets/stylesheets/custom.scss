@@ -207,3 +207,9 @@ span.picture {
     margin-left: 60px;
   }
 }
+
+.product-image {
+  aspect-ratio: 16/9;
+  object-fit: fill;
+  height: 200px;
+}
