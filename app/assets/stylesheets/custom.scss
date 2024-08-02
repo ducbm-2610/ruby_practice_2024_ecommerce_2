@@ -217,3 +217,60 @@ span.picture {
 .search-field {
   vertical-align: top !important;
 }
+
+.product-container {
+  body {
+    background-color: #000;
+  }
+  .card {
+    border: none;
+  }
+  .product {
+    background-color: #eee;
+  }
+  .brand {
+    font-size: 13px;
+  }
+  .act-price {
+    color: rgb(0, 81, 255);
+    font-weight: 700;
+  }
+  .dis-price {
+    text-decoration: line-through;
+  }
+  .about {
+    font-size: 14px;
+  }
+  .color {
+    margin-bottom: 10px;
+  }
+  label.radio {
+    cursor: pointer;
+  }
+  label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  label.radio span {
+    padding: 2px 9px;
+    border: 2px solid #ff0000;
+    display: inline-block;
+    color: #ff0000;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  label.radio input:checked + span {
+    border-color: #ff0000;
+    background-color: #ff0000;
+    color: #fff;
+  }
+  .btn-danger:focus {
+    box-shadow: none;
+  }
+  .cart i {
+    margin-right: 10px;
+  }
+}
