@@ -16,4 +16,8 @@ module CartsHelper
   def initialize_session
     session[:cart] ||= {}
   end
+
+  def reset_cart
+    session[:cart] = {}
+  end
 end

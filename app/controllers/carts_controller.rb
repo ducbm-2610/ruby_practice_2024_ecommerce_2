@@ -1,6 +1,9 @@
 class CartsController < ApplicationController
   include CartsHelper
+  include UsersHelper
+
   before_action :check_and_redirect, only: %i(add)
+  before_action :load_cart, only: %i(checkout)
 
   def add
     product_id = params.dig(:cart_item, :product_id).to_s
@@ -24,6 +27,10 @@ class CartsController < ApplicationController
     session[:cart].delete(id)
     load_cart
     respond_to(&:js)
+  end
+
+  def checkout
+    @order = Order.new
   end
 
   private

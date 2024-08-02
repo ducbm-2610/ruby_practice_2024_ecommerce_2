@@ -28,7 +28,7 @@ end
   UserPayment.create!(user_id: user_id, payment_type: n%2 == 0 ? payment_type[0] : payment_type[1])
 end
 
-2.times do |n|
+4.times do |n|
   user_id = n + 2
   address_detail = "User Adddess #{n+1}"
   phone = "8032402340#{n+1}"
@@ -41,7 +41,7 @@ end
   total = 46 + rand(1..10)
   payment_type = %w(cod visa).sample
 
-  Order.create!(user_id: user_id, total: total, payment_type: payment_type)
+  Order.create!(user_id: user_id, total: total, payment_type: payment_type, user_address_id: n+1)
 end
 
 OrderItem.create(order_id: 1, product_id: 13, quantity:2)
