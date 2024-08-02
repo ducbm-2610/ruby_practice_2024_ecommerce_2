@@ -26,7 +26,13 @@ class OrdersController < ApplicationController
     flash[:danger] = e.message
   end
 
-  def show; end
+  def show
+    @order = current_user.order.find_by id: params[:id]
+  end
+
+  def index
+    @pagy, @orders = pagy current_user.order.newest, items: Settings.digit_10
+  end
 
   def index
     @pagy, @orders = pagy current_user.order.newest, items: Settings.digit_10
