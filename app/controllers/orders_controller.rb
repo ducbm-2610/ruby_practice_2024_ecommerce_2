@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   include CartsHelper
-  before_action :load_cart, only: %i(create show)
+  before_action :load_cart, only: %i(create show index)
 
   def new
     @order = Order.new
@@ -27,6 +27,10 @@ class OrdersController < ApplicationController
   end
 
   def show; end
+
+  def index
+    @pagy, @orders = pagy current_user.order.newest, items: Settings.digit_10
+  end
 
   private
 

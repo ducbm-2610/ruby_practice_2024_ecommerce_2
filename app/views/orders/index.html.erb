@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Order History</h1>
+
+  <% if @orders.present? %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= l(order.created_at, format: :long) %></td>
+            <td><%= order.status.capitalize %></td>
+            <td><%= number_to_currency(order.total) %></td>
+            <td>
+              <%= link_to 'View Details', order_path(order), class: "btn btn-info btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%== pagy_bootstrap_nav @pagy %>
+  <% else %>
+    <p>No orders found.</p>
+  <% end %>
+</div>
