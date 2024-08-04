@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'cart/checkout', to: 'carts#checkout', as: 'cart_checkout'
   
   resources :orders
+  delete 'orders/cancel/:id', to: 'orders#cancel', as: 'cancel_order'
   
   root "products#index"
 end

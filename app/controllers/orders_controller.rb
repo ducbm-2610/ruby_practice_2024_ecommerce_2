@@ -34,8 +34,15 @@ class OrdersController < ApplicationController
     @pagy, @orders = pagy current_user.order.newest, items: Settings.digit_10
   end
 
-  def index
-    @pagy, @orders = pagy current_user.order.newest, items: Settings.digit_10
+  def cancel
+    @order = current_user.order.find_by id: params[:id]
+    if @order.status == "pending"
+      @order.update(status: "cancelled")
+      flash[:notice] = "Order has been cancelled."
+    else
+      flash[:alert] = "Only unprocessed orders can be cancelled."
+    end
+    redirect_to order_path(@order)
   end
 
   private
