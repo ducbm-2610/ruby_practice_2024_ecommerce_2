@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
   include ProductsHelper
+  include CartsHelper
 
+  before_action :initialize_session
+  before_action :load_cart
   before_action :find_product, except: %i(index new create)
 
   def index

@@ -1,0 +1,19 @@
+<%= link_to "#", {class: "cart-dropdown-toggle", "data-toggle" => "dropdown"} do %>
+  <%= "Cart" %> (<span id="cart-count"><%= @cart.size %></span>)
+  <b class="caret"></b>
+<% end %>
+<ul class="dropdown-menu dropdown-menu-cart" id="cart-summary">
+  <% if cart.any? %>
+    <% cart.each do |cart_item| %>
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-4"><%= cart_item[:item].name %></div>
+        <div class="col-md-4">Quantity: <%= cart_item[:quantity] %></div>
+        <div class="col-md-4"><%= button_to 'x', cart_remove_path(id: cart_item[:item].id, operator: "remove"),remote: true, method: :delete , class: "btn btn-primary" %></div>
+      </div>
+    <% end %>
+    <p>Total Price: <%= number_to_currency(@total_price) %></p>
+    <%= button_to 'Checkout', "#", class: "btn btn-primary" %>
+  <% else %>
+    <p>Your cart is empty.</p>
+  <% end %>
+</ul>

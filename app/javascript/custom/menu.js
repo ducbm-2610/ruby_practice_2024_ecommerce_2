@@ -15,3 +15,12 @@ document.addEventListener("turbo:load", function () {
     menu.classList.toggle("active");
   });
 });
+
+document.addEventListener('turbo:load', function(event) {
+  if ($(event.target).find('#cart').length) {
+    $('.cart-dropdown-toggle').off('click').on('click', function(event) {
+      event.preventDefault();
+      $('.dropdown-menu-cart').toggleClass('active');
+    });
+  }
+});
