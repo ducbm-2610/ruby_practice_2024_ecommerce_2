@@ -5,6 +5,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :dashboard
+    resources :orders do
+      member do
+        post :confirm
+        delete :cancel
+      end
+    end
   end
 
   post 'cart/add/:id', to: 'carts#add', as: 'cart_add'

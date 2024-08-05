@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>Order Details</h1>
+  <div class="order-info">
+    <h2>Order ID: <%= @order.id %></h2>
+    <p>Date: <%= l(@order.created_at, format: :long) %></p>
+    <p>Status: <%= @order.status.capitalize %></p>
+    <p>Total: <%= number_to_currency(@order.total) %></p>
+  </div>
+  <h3>Shipping Address</h3>
+  <div class="address-info">
+    <p><strong>Address:</strong> <%= @order.user_address.address_detail %></p>
+    <p><strong>Phone:</strong> <%= @order.user_address.phone %></p>
+  </div>
+  <h3>Order Items</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_item.each do |item| %>
+        <tr>
+          <td><%= link_to item.product.name, product_path(item.product) %></td>
+          <td><%= item.quantity %></td>
+          <td><%= number_to_currency(item.product.price) %></td>
+          <td><%= number_to_currency(item.product.price * item.quantity) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="order-actions">
+    <% if @order.status == 'pending' %>
+      <%= form_with url: cancel_admin_order_path(@order), method: :delete, local: true do |form| %>
+        <div class="form-group">
+          <%= form.label :reason, "Cancellation Reason" %>
+          <%= form.text_area :reason, class: "form-control", required: true %>
+        </div>
+        <%= form.button 'Cancel Order', type: :submit, class: "btn btn-danger", data: { confirm: "Are you sure you want to cancel this order?" } %>
+      <% end %>
+      <%= button_to 'Confirm Order', confirm_admin_order_path(@order), method: :post, class: "btn btn-success" %>
+    <% end %>
+  </div>
+  <%= link_to 'Back to Order List', admin_orders_path, class: "btn btn-secondary mt-3" %>
+</div>

@@ -4,4 +4,5 @@ class Order < ApplicationRecord
   belongs_to :user_address, optional: true
 
   scope :newest, ->{order created_at: :desc}
+  scope :newest_pending, ->{where(status: "pending").order(created_at: :desc)}
 end
