@@ -1,0 +1,43 @@
+<!-- app/views/products/_form.html.erb -->
+<%= form_with(model: product, local: true, html: { multipart: true }) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, min: 0 %>
+  </div>
+  <div class="field">
+    <%= form.label :product_category_id %>
+    <%= form.collection_select :product_category_id, ProductCategory.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

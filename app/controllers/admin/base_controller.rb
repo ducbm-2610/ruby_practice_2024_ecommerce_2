@@ -5,7 +5,10 @@ module Admin
     private
 
     def check_if_admin
-      redirect_to root_path unless defined?(current_user) || current_user.admin?
+      return if current_user&.admin?
+
+      flash[:alert] = "You are not authorized to access this section."
+      redirect_to root_path
     end
   end
 end

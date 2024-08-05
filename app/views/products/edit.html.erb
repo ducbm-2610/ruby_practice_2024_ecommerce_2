@@ -1,2 +1,11 @@
-<h1>Products#edit</h1>
-<p>Find me in app/views/products/edit.html.erb</p>
+<!-- app/views/products/edit.html.erb -->
+<h1>Edit Product</h1>
+<%= render 'form', product: @product %>
+<%= link_to 'Delete Product', product_path(@product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+<% if @product.image.attached? %>
+  <div>
+    <h3>Current Image:</h3>
+    <%= image_tag @product.image, class: "product-image" %>
+  </div>
+<% end %>
+<%= link_to 'Back', products_path %>

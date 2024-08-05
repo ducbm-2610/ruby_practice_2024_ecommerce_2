@@ -3,9 +3,12 @@ module CartsHelper
     product_ids = session[:cart].keys
     products = Product.indexed_by_id(product_ids)
 
-    @cart = session[:cart].map do |product_id, quantity|
-      item = products[product_id.to_i]
-      {item:, quantity:}
+    valid_cart_items = session[:cart].select do |product_id|
+      products[product_id.to_i]
+    end
+
+    @cart = valid_cart_items.map do |product_id, quantity|
+      {item: products[product_id.to_i], quantity:}
     end
 
     @total_price = @cart.sum do |cart_item|
